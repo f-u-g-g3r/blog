@@ -1,7 +1,7 @@
 @extends('partials.layout')
 @section('content')
     <div class="container mx-auto">
-
+        {{ $posts->links() }}
         <div class="flex flex-row flex-wrap ">
 
             @foreach($posts as $post)
