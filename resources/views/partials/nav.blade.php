@@ -49,6 +49,9 @@
                                     <input type="submit" value="Logout" />
                                 </form>
                             </li>
+                            <li>
+                                <a href="{{route('profile.edit')}}">Edit profile</a>
+                            </li>
                         </ul>
                     </details>
                 </li>
