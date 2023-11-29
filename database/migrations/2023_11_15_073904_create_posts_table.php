@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('body')->nullable();
+//            $table->unsignedBigInteger('user_id');
+            // cascade = if we delete the user, all the posts connected to this user would also be deleted automatically.
+//            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

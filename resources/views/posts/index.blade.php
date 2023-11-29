@@ -23,8 +23,13 @@
                         <td>
                             <div class="join">
                                 <a class="btn join-item btn-info">View</a>
-                                <a class="btn join-item btn-warning">Edit</a>
-                                <a class="btn join-item btn-error">Delete</a>
+                                <a class="btn join-item btn-warning" href="{{ route('posts.edit', ['post' => $post]) }}">Edit</a>
+                                <button form="delete-form-{{$post->id}}" type="submit" class="btn join-item btn-error" value="Delete">Delete</button>
+                                <form id="delete-form-{{$post->id}}" action="{{route('posts.destroy', ['post' => $post])}}" method="POST">
+                                    @csrf
+                                    @method('delete')
+
+                                </form>
                             </div>
                         </td>
                     </tr>
