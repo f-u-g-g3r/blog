@@ -3,9 +3,9 @@
     <div class="container mx-auto">
         <div class="card bg-base-200 shadow-xl">
             <div class="card-body">
-                <form action="{{ route('posts.update', ['post' => $post]) }}">
-                    @method('PUT')
+                <form action="{{ route('posts.update', ['post' => $post]) }}" method="POST">
                     @csrf
+                    @method('PUT')
                     <div class="form-control w-full">
                         <label class="label" for="title">
                             <span class="label-text">Title</span>

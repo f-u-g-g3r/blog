@@ -65,7 +65,7 @@ class PostController extends Controller
 //        $post->title = $request->validated('title');
 //        $post->title = $request->validated('body');
         $post->save();
-        return redirect()->back();
+        return redirect()->route('posts.index');
 
     }
 
