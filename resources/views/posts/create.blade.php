@@ -3,7 +3,7 @@
     <div class="container mx-auto">
         <div class="card bg-base-200 shadow-xl">
             <div class="card-body">
-                <form action="{{ route('posts.store') }}" method="POST">
+                <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-control w-full">
                         <label class="label" for="title">
@@ -24,6 +24,19 @@
                         </label>
                         <textarea class="textarea textarea-bordered h-24 w-full" placeholder="Content" id="body" name="body">{{ old('body') }}</textarea>
                         @error('body')
+                        <label class="label">
+                            <span class="label-text-alt text-red-500">{{ $message }}</span>
+                        </label>
+                        @enderror
+                    </div>
+
+                    <div class="form-control w-full">
+                        <label class="label" for="image">
+                            <span class="label-text">Image</span>
+                        </label>
+
+                        <input type="file" class="file-input w-full" id="image" name="image" />
+                        @error('title')
                         <label class="label">
                             <span class="label-text-alt text-red-500">{{ $message }}</span>
                         </label>
