@@ -19,7 +19,6 @@ return new class extends Migration
             // cascade = if we delete the user, all the posts connected to this user would also be deleted automatically.
 //            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreignIdFor(\App\Models\User::class)->constrained()->cascadeOnDelete();
-            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

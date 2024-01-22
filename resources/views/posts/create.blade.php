@@ -35,8 +35,8 @@
                             <span class="label-text">Image</span>
                         </label>
 
-                        <input type="file" class="file-input w-full" id="image" name="image" />
-                        @error('title')
+                        <input type="file" class="file-input file-input-bordered w-full" id="image" name="image" />
+                        @error('image')
                         <label class="label">
                             <span class="label-text-alt text-red-500">{{ $message }}</span>
                         </label>
