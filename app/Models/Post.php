@@ -1,48 +1,54 @@
 <?php
+
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+
 class Post extends Model
 {
     use HasFactory;
+
     protected $fillable = ['title', 'body'];
-    public function snippet():Attribute  {
-        return Attribute::get(function (){
+
+    public function snippet(): Attribute
+    {
+        return Attribute::get(function () {
             return substr($this->body, 0, 200);
         });
     }
-    public function user(){
+
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
-    public function images(){
+
+    public function images()
+    {
         return $this->hasMany(Image::class);
     }
 
-    // public function image():Attribute {
-    //     return Attribute::make(
-    //         get: function ($image){
-    //             if(!$image || parse_url($image, PHP_URL_SCHEME)){
-    //                 return $image;
-    //             }
-    //             return Storage::url($image);
-    //         },
-    //         set: function ($image){
-    //             if(!is_a($image, UploadedFile::class)){
-    //                 return $image;
-    //             }
-    //             return request()->file('image')->store('public');
-    //         }
-    //     );
-    // }
-
-    public function comments(){
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
 
-    public function likes(){
+    public function likes()
+    {
         return $this->hasMany(Like::class);
+    }
+
+    public function authHasLiked(): Attribute
+    {
+        return Attribute::get(function () {
+            if (Auth::check()) {
+                return $this->likes()->where('user_id', Auth::user()->id)->exists();
+            }
+            return false;
+        });
     }
 }
